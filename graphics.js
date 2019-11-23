@@ -1,16 +1,15 @@
 const WALL = 0;
+const BOX = 1;
+
+
 
 function fillBackground(r, g, b) {
     const map = engine.map;
     const pixelData = [];
     for(let x = 0; x < map.width; x++) {
-        pixelData[x] = new Array(map.height * 4);
+        pixelData[x] = new Array(map.height);
         for(let y = 0; y < map.height; y++) {
-            const pixelIndex = y * 4;
-            pixelData[x][pixelIndex] = r;
-            pixelData[x][pixelIndex+1] = g;
-            pixelData[x][pixelIndex+2] = b;
-            pixelData[x][pixelIndex+3] = 255;
+            pixelData[x][y] = {r, g, b};
         }
     }
     engine.renderer.pixels = pixelData;
@@ -19,6 +18,10 @@ function fillBackground(r, g, b) {
 
 function createWall(options) {
     return {...options, type: WALL};
+}
+
+function createBox(options) {
+    return {...options, type: BOX};
 }
 
 function addObject(obj) {
